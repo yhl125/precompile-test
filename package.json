@@ -1,0 +1,25 @@
+{
+  "name": "ntt-precompile-test",
+  "version": "1.0.0",
+  "description": "Integration tests for EIP-7885 NTT precompiles using Viem",
+  "type": "module",
+  "scripts": {
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": ["ntt", "precompile", "ethereum", "viem", "cryptography"],
+  "author": "NTT Precompile Team",
+  "license": "MIT",
+  "dependencies": {
+    "viem": "^2.21.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@vitest/ui": "^2.0.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.0.0"
+  }
+}
