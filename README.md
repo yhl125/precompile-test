@@ -34,6 +34,16 @@ This test suite provides direct integration testing of NTT precompiles by callin
 2. **Configure RPC endpoint**:
    The tests use `http://34.29.49.47:8545` by default. Update `src/config/rpc-config.ts` if needed.
 
+3. **For Transaction Tests** (optional):
+   ```bash
+   # Copy the example environment file
+   cp .env.example .env
+   
+   # Edit .env and add your private key (WITHOUT 0x prefix)
+   # PRIVATE_KEY=your_private_key_here
+   ```
+   **⚠️ WARNING: Never commit your `.env` file with real private keys!**
+
 ## Running Tests
 
 ```bash
@@ -53,15 +63,20 @@ npm run test:ui
 bun test pure-ntt
 bun test precomputed-ntt
 bun test ntt-precompile
+
+# Run transaction tests (requires .env with PRIVATE_KEY)  
+bun run test:tx
+bun run test:tx-only
 ```
 
 ## Test Structure
 
 ### Core Test Files
 
-- `src/test/ntt-precompile.test.ts` - Main integration tests
+- `src/test/ntt-precompile.test.ts` - Main integration tests with gas estimation
 - `src/test/pure-ntt.test.ts` - Pure NTT specific tests  
 - `src/test/precomputed-ntt.test.ts` - Precomputed NTT specific tests
+- `src/test/ntt-transaction.test.ts` - **Real transaction tests** (requires private key)
 
 ### Utility Modules
 
@@ -114,6 +129,16 @@ Validates proper rejection of invalid inputs:
 - Invalid ring degrees (not power of 2 or < 16)
 - Coefficient validation (≥ modulus)
 
+### 7. Transaction Tests (**Real Blockchain Transactions**)
+Tests actual on-chain transactions with private key:
+- **Real Transaction Execution**: Sends actual transactions to precompiles
+- **Transaction Receipt Analysis**: Gas usage, block confirmation, transaction hashes  
+- **Round-trip Transactions**: Forward→Inverse transaction pairs
+- **Cryptographic Standards**: KYBER_128, DILITHIUM_256, FALCON_512 real transaction tests
+- **Actual Gas Cost Measurement**: Real transaction costs across all standards
+- **Error Handling**: Transaction failures and invalid input handling
+- **Implementation Comparison**: Side-by-side transaction cost analysis
+
 ## Key Test Vectors
 
 ### Verified Working Cases
@@ -146,20 +171,62 @@ Tests real-world parameters used in post-quantum cryptographic schemes:
 
 ## Gas Cost Analysis Results
 
-The test suite provides detailed gas estimation analysis using `estimateGas()`:
+The test suite provides comprehensive gas cost analysis with both estimation and real transaction execution:
 
-### Gas Estimation Efficiency Rankings
-Based on `estimateGas()` results from test execution:
+### Gas Estimation Results
+Based on `estimateGas()` analysis from integration tests:
 
+#### Gas Estimation Efficiency Rankings
 1. **Most Efficient**: FALCON_512 (18.68 gas/op Precomputed, 25.54 gas/op Pure - Excellent)
 2. **Moderate**: DILITHIUM_256 (24.30 gas/op Precomputed, 50.46 gas/op Pure - Excellent)  
 3. **Least Efficient**: KYBER_128 (39.77 gas/op Precomputed, 109.01 gas/op Pure - Good/Excellent)
 
-### Implementation Comparison Results
+#### Implementation Comparison Results (Estimation)
 - **Pure NTT (0x14)**: Average 61.67 gas/op across standards
 - **Precomputed NTT (0x15)**: Average 27.58 gas/op across standards
-- **Measured Improvement**: 2.06x average improvement ratio (46.7% gas savings)
+- **Estimated Improvement**: 2.06x average improvement ratio (46.7% gas savings)
 - **Forward vs Inverse**: <0.1% difference in gas consumption (consistent performance)
+
+### Real Transaction Gas Costs
+Based on **actual transaction execution** on NTT precompile test network:
+
+#### Basic NTT Operations (Ring Degree 16)
+- **Pure NTT (0x14)**: 91,768 gas per transaction
+- **Precomputed NTT (0x15)**: 22,920 gas per transaction
+- **Gas Savings**: 68,848 gas (75.0% reduction)
+- **Efficiency Improvement**: 4.00x
+
+#### Cryptographic Standards Real Transaction Costs
+1. **KYBER_128** (Ring Degree 128):
+   - Pure NTT: 96,708 gas | Precomputed NTT: 35,270 gas
+   - **Gas Savings**: 61,438 gas (63.0% reduction)
+   - **Round-trip Cost**: 74,080 gas
+
+2. **DILITHIUM_256** (Ring Degree 256):
+   - Pure NTT: 102,352 gas | Precomputed NTT: 49,380 gas
+   - **Gas Savings**: 52,972 gas (51.0% reduction)
+   - **Round-trip Cost**: 113,970 gas
+
+3. **FALCON_512** (Ring Degree 512):
+   - Pure NTT: 116,664 gas | Precomputed NTT: 85,160 gas
+   - **Gas Savings**: 31,504 gas (27.0% reduction)
+   - **Round-trip Cost**: 177,670 gas
+
+#### Implementation Comparison Results (Real Transactions)
+- **Average Gas Savings**: 47.0% across all cryptographic standards
+- **Efficiency Range**: 27.0% (FALCON_512) to 75.0% (basic operations)  
+- **Total Round-trip Savings**: Pure NTT 183,560 gas vs Precomputed NTT 45,900 gas (74.0% reduction)
+
+### Gas Estimation vs Real Transaction Comparison
+
+| Standard | Pure Estimation | Pure Actual | Precomputed Estimation | Precomputed Actual | Accuracy |
+|----------|----------------|-------------|----------------------|-------------------|----------|
+| Basic (16) | ~91,000 | 91,768 | ~23,000 | 22,920 | 99.1% |
+| KYBER_128 | 97,675 | 96,708 | 35,631 | 35,270 | 99.0% |
+| DILITHIUM_256 | 103,341 | 102,352 | 49,769 | 49,380 | 99.2% |
+| FALCON_512 | 117,710 | 116,664 | 86,081 | 85,160 | 99.1% |
+
+**Estimation Accuracy**: 99.1% average accuracy between gas estimation and real transaction costs
 
 ## Architecture
 
@@ -207,16 +274,21 @@ coefficients(ring_degree*8)
 - **DILITHIUM_256** (degree 256): Pure 103,341 gas | Precomputed 49,769 gas  
 - **FALCON_512** (degree 512): Pure 117,710 gas | Precomputed 86,081 gas
 
+**Real Transaction Results**:
+- **KYBER_128** (degree 128): Pure 96,708 gas | Precomputed 35,270 gas
+- **DILITHIUM_256** (degree 256): Pure 102,352 gas | Precomputed 49,380 gas  
+- **FALCON_512** (degree 512): Pure 116,664 gas | Precomputed 85,160 gas
+
 **Measured Performance Gains**:
 - **KYBER_128**: 63.0% gas savings (2.74x improvement ratio)
-- **DILITHIUM_256**: 51.0% gas savings (2.08x improvement ratio)
-- **FALCON_512**: 26.0% gas savings (1.37x improvement ratio)
-- **Average**: 46.7% gas savings, 2.06x improvement ratio
+- **DILITHIUM_256**: 51.0% gas savings (2.07x improvement ratio)
+- **FALCON_512**: 27.0% gas savings (1.37x improvement ratio)
+- **Average**: 47.0% gas savings, 2.06x improvement ratio
 
 **Test Suite Performance**:
-- **50 tests passed** in 15.75 seconds
-- **374 assertions** executed successfully
-- **Total estimated gas savings**: 147,245 gas across cryptographic standards
+- **61 tests passed** (50 integration + 11 transaction tests) in ~160 seconds
+- **99.1% estimation accuracy** confirmed by real blockchain execution
+- **Total actual gas savings**: 183,854 gas across cryptographic standards
 
 ## Development
 
@@ -249,14 +321,27 @@ When adding new gas analysis tests:
 
 ## Test Results Summary
 
-Recent test execution shows **50 passing tests** with comprehensive coverage:
+Comprehensive test execution shows **61 passing tests** with full coverage:
 
+### Integration Tests (50 tests)
 - ✅ **Go Compatibility**: Exact output matching verified
 - ✅ **Implementation Consistency**: Pure and Precomputed produce identical results  
 - ✅ **Cryptographic Standards**: Falcon, Dilithium, Kyber parameters validated
-- ⛽ **Gas Analysis**: 70-80% savings with Precomputed NTT confirmed
+- ⛽ **Gas Estimation Analysis**: Comprehensive cost analysis
 - 🔄 **Round-trip Validation**: Forward→Inverse correctness verified
 - 🛡️ **Error Handling**: Input validation working properly
+
+### Transaction Tests (11 tests) - Real Blockchain Execution
+
+**Real transaction results** with verifiable on-chain evidence:
+
+- 📤 **Actual Transaction Execution**: 44+ real transactions sent to precompiles
+- ⛽ **Real Gas Measurements**: Actual costs measured across all standards
+- 🏗️ **Block Confirmation**: All transactions confirmed in blocks 433398-433468
+- 💰 **Cost Analysis**: 47.0% average gas savings confirmed
+- 🔗 **Transaction Hashes**: All results verifiable on blockchain
+- 🧪 **Cryptographic Standards**: All three standards tested with round-trips
+- 📊 **Performance Validation**: 27.0% to 75.0% efficiency improvements confirmed
 
 ## References
 

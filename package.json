@@ -8,12 +8,15 @@
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
+    "test:tx": "vitest run ntt-transaction",
+    "test:tx-only": "vitest run ntt-transaction --reporter=verbose",
     "type-check": "tsc --noEmit"
   },
   "keywords": ["ntt", "precompile", "ethereum", "viem", "cryptography"],
   "author": "NTT Precompile Team",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^17.2.2",
     "viem": "^2.21.0"
   },
   "devDependencies": {
