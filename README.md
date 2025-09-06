@@ -6,6 +6,8 @@ Comprehensive integration test suite for EIP-7885 NTT (Number Theoretic Transfor
 
 This test suite provides direct integration testing of NTT precompiles by calling them through RPC, bypassing the limitations of Foundry's local EVM that doesn't include custom precompiles.
 
+**Testing Environment**: Tests are executed against an op-geth client built from [yhl125/op-geth](https://github.com/yhl125/op-geth/tree/optimism) with integrated NTT precompile support.
+
 ### Precompiles Tested
 
 - **Pure NTT (0x14)**: Standard NTT implementation with on-the-fly computation
@@ -289,59 +291,6 @@ coefficients(ring_degree*8)
 - **61 tests passed** (50 integration + 11 transaction tests) in ~160 seconds
 - **99.1% estimation accuracy** confirmed by real blockchain execution
 - **Total actual gas savings**: 183,854 gas across cryptographic standards
-
-## Development
-
-### Adding New Tests
-
-1. Create test vectors in `src/utils/test-vectors.ts`
-2. Add utility functions in `src/utils/ntt-utils.ts`
-3. Implement tests using Vitest framework
-4. Follow existing patterns for error handling and assertions
-
-### Test Best Practices
-
-- Use descriptive test names and clear console logging
-- Include gas cost analysis for performance-critical tests
-- Validate both success and error cases thoroughly
-- Test edge cases, boundary conditions, and cryptographic standards
-- Use proper timeouts for RPC operations (15-180s for complex tests)
-- Compare both Pure and Precomputed implementations
-- Document expected gas consumption patterns
-
-### Adding Gas Cost Tests
-
-When adding new gas analysis tests:
-
-1. Use `callNTTPrecompileWithGas()` for both implementations
-2. Calculate efficiency metrics (gas/coefficient, gas/operation) 
-3. Include comparative analysis and savings calculations
-4. Test with realistic cryptographic parameters
-5. Document expected performance characteristics
-
-## Test Results Summary
-
-Comprehensive test execution shows **61 passing tests** with full coverage:
-
-### Integration Tests (50 tests)
-- ✅ **Go Compatibility**: Exact output matching verified
-- ✅ **Implementation Consistency**: Pure and Precomputed produce identical results  
-- ✅ **Cryptographic Standards**: Falcon, Dilithium, Kyber parameters validated
-- ⛽ **Gas Estimation Analysis**: Comprehensive cost analysis
-- 🔄 **Round-trip Validation**: Forward→Inverse correctness verified
-- 🛡️ **Error Handling**: Input validation working properly
-
-### Transaction Tests (11 tests) - Real Blockchain Execution
-
-**Real transaction results** with verifiable on-chain evidence:
-
-- 📤 **Actual Transaction Execution**: 44+ real transactions sent to precompiles
-- ⛽ **Real Gas Measurements**: Actual costs measured across all standards
-- 🏗️ **Block Confirmation**: All transactions confirmed in blocks 433398-433468
-- 💰 **Cost Analysis**: 47.0% average gas savings confirmed
-- 🔗 **Transaction Hashes**: All results verifiable on blockchain
-- 🧪 **Cryptographic Standards**: All three standards tested with round-trips
-- 📊 **Performance Validation**: 27.0% to 75.0% efficiency improvements confirmed
 
 ## References
 

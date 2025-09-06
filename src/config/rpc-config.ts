@@ -4,7 +4,7 @@ import { createPublicClient, http } from 'viem'
  * RPC configuration for NTT precompile testing
  * Uses the remote node that has NTT precompiles deployed
  */
-export const RPC_URL = 'http://34.29.49.47:8545'
+export const RPC_URL = process.env.RPC_URL || 'http://34.29.49.47:8545'
 
 /**
  * Create a public client for interacting with the precompile-enabled node
