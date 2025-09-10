@@ -18,11 +18,10 @@ export const publicClient = createPublicClient({
 })
 
 /**
- * Precompile addresses as defined in EIP-7885
+ * Precompile addresses as defined in EIP-7885 (Pure NTT only)
  */
 export const PRECOMPILE_ADDRESSES = {
   PURE_NTT: '0x0000000000000000000000000000000000000012' as const,
-  PRECOMPUTED_NTT: '0x0000000000000000000000000000000000000013' as const,
 } as const
 
 /**
