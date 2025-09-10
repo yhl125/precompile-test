@@ -151,7 +151,7 @@ describe('NTT Precompile Integration Tests', () => {
       expect(blockNumber).toBeGreaterThan(0n)
     })
     
-    it('should detect Pure NTT precompile (0x14)', async () => {
+    it('should detect Pure NTT precompile (0x12)', async () => {
       const { input } = getKnownTestVector()
       const result = await callNTTPrecompile(PRECOMPILE_ADDRESSES.PURE_NTT, input)
       
@@ -163,7 +163,7 @@ describe('NTT Precompile Integration Tests', () => {
       expect(result.error == null || !result.error.match(/unknown precompile/i)).toBe(true)
     }, 10000)
     
-    it('should detect Precomputed NTT precompile (0x15)', async () => {
+    it('should detect Precomputed NTT precompile (0x13)', async () => {
       const { input } = getKnownTestVector()
       const result = await callNTTPrecompile(PRECOMPILE_ADDRESSES.PRECOMPUTED_NTT, input)
       
@@ -177,7 +177,7 @@ describe('NTT Precompile Integration Tests', () => {
   })
 
   describe('Go Compatibility Tests', () => {
-    it('should match Go test output for Pure NTT (0x14)', async () => {
+    it('should match Go test output for Pure NTT (0x12)', async () => {
       const { input, expectedOutput } = getKnownTestVector()
       const result = await callNTTPrecompile(PRECOMPILE_ADDRESSES.PURE_NTT, input)
       
@@ -188,7 +188,7 @@ describe('NTT Precompile Integration Tests', () => {
       console.log(`✅ Pure NTT Output: ${formatCoefficients(result.coefficients)}`)
     }, 10000)
     
-    it('should match Go test output for Precomputed NTT (0x15)', async () => {
+    it('should match Go test output for Precomputed NTT (0x13)', async () => {
       const { input, expectedOutput } = getKnownTestVector()
       const result = await callNTTPrecompile(PRECOMPILE_ADDRESSES.PRECOMPUTED_NTT, input)
       
@@ -339,8 +339,8 @@ describe('NTT Precompile Integration Tests', () => {
       expect(pureResult.success, `Pure NTT failed: ${pureResult.error}`).toBe(true)
       expect(precomputedResult.success, `Precomputed NTT failed: ${precomputedResult.error}`).toBe(true)
       
-      console.log(`⛽ Pure NTT (0x14) Gas Used: ${pureResult.gasUsed?.toString() || 'N/A'}`)
-      console.log(`⛽ Precomputed NTT (0x15) Gas Used: ${precomputedResult.gasUsed?.toString() || 'N/A'}`)
+      console.log(`⛽ Pure NTT (0x12) Gas Used: ${pureResult.gasUsed?.toString() || 'N/A'}`)
+      console.log(`⛽ Precomputed NTT (0x13) Gas Used: ${precomputedResult.gasUsed?.toString() || 'N/A'}`)
       
       if (pureResult.gasUsed && precomputedResult.gasUsed) {
         const gasDiff = pureResult.gasUsed - precomputedResult.gasUsed
@@ -391,8 +391,8 @@ describe('NTT Precompile Integration Tests', () => {
           })
           
           console.log(`⛽ ${vector.name}:`)
-          console.log(`  └── Pure NTT (0x14): ${pureResult.gasUsed} gas`)
-          console.log(`  └── Precomputed NTT (0x15): ${precomputedResult.gasUsed} gas`)
+          console.log(`  └── Pure NTT (0x12): ${pureResult.gasUsed} gas`)
+          console.log(`  └── Precomputed NTT (0x13): ${precomputedResult.gasUsed} gas`)
           console.log(`  └── Gas Saved: ${gasDiff} (${efficiencyGain.toFixed(1)}% efficiency gain)`)
           console.log(`  └── Ring Degree: ${vector.input.ringDegree}, Modulus: ${vector.input.modulus}`)
         } else {
@@ -453,12 +453,12 @@ describe('NTT Precompile Integration Tests', () => {
       expect(precomputedInverseResult.success, `Precomputed Inverse NTT failed: ${precomputedInverseResult.error}`).toBe(true)
       
       console.log(`⛽ Forward Operation Gas Costs:`)
-      console.log(`  └── Pure NTT (0x14): ${pureForwardResult.gasUsed?.toString() || 'N/A'}`)
-      console.log(`  └── Precomputed NTT (0x15): ${precomputedForwardResult.gasUsed?.toString() || 'N/A'}`)
+      console.log(`  └── Pure NTT (0x12): ${pureForwardResult.gasUsed?.toString() || 'N/A'}`)
+      console.log(`  └── Precomputed NTT (0x13): ${precomputedForwardResult.gasUsed?.toString() || 'N/A'}`)
       
       console.log(`⛽ Inverse Operation Gas Costs:`)
-      console.log(`  └── Pure NTT (0x14): ${pureInverseResult.gasUsed?.toString() || 'N/A'}`)
-      console.log(`  └── Precomputed NTT (0x15): ${precomputedInverseResult.gasUsed?.toString() || 'N/A'}`)
+      console.log(`  └── Pure NTT (0x12): ${pureInverseResult.gasUsed?.toString() || 'N/A'}`)
+      console.log(`  └── Precomputed NTT (0x13): ${precomputedInverseResult.gasUsed?.toString() || 'N/A'}`)
       
       // Analyze forward vs inverse for each implementation
       if (pureForwardResult.gasUsed && pureInverseResult.gasUsed) {
@@ -646,14 +646,14 @@ describe('NTT Precompile Integration Tests', () => {
       if (benchmarkResults.length > 0) {
         console.log(`\n📊 Cryptographic Standards Efficiency Comparison Summary:`)
         
-        console.log(`\n  Pure NTT (0x14) Performance:`)
+        console.log(`\n  Pure NTT (0x12) Performance:`)
         benchmarkResults
           .sort((a, b) => a.pureGasPerOp - b.pureGasPerOp)
           .forEach(result => {
             console.log(`    • ${result.name}: ${result.pureGasPerOp.toFixed(2)} gas/op (${result.pureEfficiency})`)
           })
         
-        console.log(`\n  Precomputed NTT (0x15) Performance:`)
+        console.log(`\n  Precomputed NTT (0x13) Performance:`)
         benchmarkResults
           .sort((a, b) => a.precomputedGasPerOp - b.precomputedGasPerOp)
           .forEach(result => {

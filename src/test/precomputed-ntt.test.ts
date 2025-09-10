@@ -86,7 +86,7 @@ async function callPureNTT(input: NTTInput): Promise<NTTResult> {
   }
 }
 
-describe('Precomputed NTT Precompile (0x15)', () => {
+describe('Precomputed NTT Precompile (0x13)', () => {
   describe('Basic Forward NTT', () => {
     it('should compute forward NTT with modulus 97', async () => {
       const input: NTTInput = {

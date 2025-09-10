@@ -10,8 +10,8 @@ This test suite provides direct integration testing of NTT precompiles by callin
 
 ### Precompiles Tested
 
-- **Pure NTT (0x14)**: Standard NTT implementation with on-the-fly computation
-- **Precomputed NTT (0x15)**: Optimized NTT implementation with precomputed twiddle factors
+- **Pure NTT (0x12)**: Standard NTT implementation with on-the-fly computation
+- **Precomputed NTT (0x13)**: Optimized NTT implementation with precomputed twiddle factors
 
 ## Features
 
@@ -184,8 +184,8 @@ Based on `estimateGas()` analysis from integration tests:
 3. **Least Efficient**: KYBER_128 (39.77 gas/op Precomputed, 109.01 gas/op Pure - Good/Excellent)
 
 #### Implementation Comparison Results (Estimation)
-- **Pure NTT (0x14)**: Average 61.67 gas/op across standards
-- **Precomputed NTT (0x15)**: Average 27.58 gas/op across standards
+- **Pure NTT (0x12)**: Average 61.67 gas/op across standards
+- **Precomputed NTT (0x13)**: Average 27.58 gas/op across standards
 - **Estimated Improvement**: 2.06x average improvement ratio (46.7% gas savings)
 - **Forward vs Inverse**: <0.1% difference in gas consumption (consistent performance)
 
@@ -193,8 +193,8 @@ Based on `estimateGas()` analysis from integration tests:
 Based on **actual transaction execution** on NTT precompile test network:
 
 #### Basic NTT Operations (Ring Degree 16)
-- **Pure NTT (0x14)**: 91,768 gas per transaction
-- **Precomputed NTT (0x15)**: 22,920 gas per transaction
+- **Pure NTT (0x12)**: 91,768 gas per transaction
+- **Precomputed NTT (0x13)**: 22,920 gas per transaction
 - **Gas Savings**: 68,848 gas (75.0% reduction)
 - **Efficiency Improvement**: 4.00x
 
