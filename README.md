@@ -8,6 +8,14 @@ This test suite provides direct integration testing of NTT precompiles by callin
 
 **Testing Environment**: Tests are executed against an op-geth client built from [yhl125/op-geth](https://github.com/yhl125/op-geth/tree/optimism) with integrated NTT precompile support.
 
+This test suite is validated against a live OP-Stack testnet, which is also available for public use:
+
+- **RPC**: http://34.29.49.47:8545
+- **Network ID**: 788484
+- **Deposit Address (Sepolia ETH)**: 0xaf17cee393b8cad73846a19e8ee718debbac6b9c
+
+You can deposit Sepolia ETH to address `0xaf17cee393b8cad73846a19e8ee718debbac6b9c` to enable testing with real transactions on this testnet.
+
 ### Precompiles Tested
 
 - **Pure NTT (0x12)**: Standard NTT implementation with on-the-fly computation
