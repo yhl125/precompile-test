@@ -11,7 +11,7 @@
     "declarationMap": true,
     "sourceMap": true,
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": "src",
     "resolveJsonModule": true,
     "allowImportingTsExtensions": true,
     "noEmit": true,

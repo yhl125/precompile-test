@@ -7,7 +7,7 @@ config();
 
 // Get configuration from environment
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
-const RPC_URL = process.env.RPC_URL || 'http://34.29.49.47:8545';
+const RPC_URL = process.env.RPC_URL || 'http://34.173.116.94:8545';
 
 if (!PRIVATE_KEY) {
   throw new Error(
