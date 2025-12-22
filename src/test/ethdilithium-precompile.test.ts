@@ -18,8 +18,8 @@ import {
  * Deployed contract addresses on the NTT precompile test network (Chain ID: 788484)
  */
 export const DEPLOYED_CONTRACTS = {
-  ETHFALCON: '0x7dD023ff0a7bf618253aE4937b8f6a98EC779307' as const,
-  ETHDILITHIUM: '0x8e76bb430ccf6049633f37f6825596c991f8951a' as const,
+  ETHFALCON: '0xB0E256D6D8146f86B802E5eCcBd37c2C0010D69b' as const,
+  ETHDILITHIUM: '0x8E76bB430cCf6049633F37F6825596C991F8951A' as const,
 } as const;
 
 /**
@@ -812,40 +812,40 @@ function createT1(): bigint[][] {
   t1[2][26] = 0x00425a9a00504fbb0041697a005dc5ed00620683005d6f6b00502ecf004cdd46n;
   t1[2][27] = 0x006f58ba00686508006363990050109c002abf9e0015b92300617cb20079d42dn;
   t1[2][28] = 0x0025742000630550070050b00321f840021009e00342eb5001df2c20021d8a6n;
-  t1[2][29] = 0x004cc6ae0054a6320004b26b003ed11c006660be003e5ba000475c9a006e4c1fn;
-  t1[2][30] = 0x00426ade002f6f2b0003cc97002c76b300014d4400620f2e0003bb7c003bdfd1n;
-  t1[2][31] = 0x001ea8bd000476b2003e49b9000de60f0031c0dc0040c3f40061d27d0058f1f6n;
+  t1[2][29] = 0x00258e280067a955001d2d7500565bd0007da9c7000d72d20015ff9d0054fee1n;
+  t1[2][30] = 0x00200c12000ee534005261ba0031e3ae00157f070016b33b002163800073fb76n;
+  t1[2][31] = 0x006cc6bc0060865f00486c0e0055153e0056b9cd003e9d8a003e5d0a003e28den;
 
   // ==========================================================================
   // t1[3][0..31]
   // ==========================================================================
-  t1[3][0] = 0x00188fb70030abc600507d3d0028e2c50051ada80015dcaa00177ccf0042ed4en;
-  t1[3][1] = 0x001b97ed00445d260062cfcb004eae960050d7db007efecf0030927c00679a37n;
-  t1[3][2] = 0x00166c02003be0e6007c0a260055ebba0048d6c70030e4e3005f9bc1007c6a7bn;
-  t1[3][3] = 0x000903b10008c64d003a2c2c00785a2a0019e37b006b4eee00093d0c00054ef5n;
-  t1[3][4] = 0x006ec12f001f168f00549e7d0028c7240037cb2c00439ade001f14fa0034b96cn;
-  t1[3][5] = 0x006f0e9a00052bf0006b5bf2005a50ab001fcb4700498b89002fd44f00155d05n;
-  t1[3][6] = 0x003ae4dd001df6bf0047c684006d9ed0004f74dd0060d7f6002d30e40023ed03n;
-  t1[3][7] = 0x00458dd0004e8dd70050e45e00285aa8007b46fd0037e26b001d36e40076c0adn;
-  t1[3][8] = 0x00242a550034dfbd00314c6200580d6c0059f48c0068a48400085c1f007c0c8an;
-  t1[3][9] = 0x0029ea540027f9060047a7dc001b1b55007d7df40063f8a4002c1b5600265e05n;
-  t1[3][10] = 0x002d0cd3007f7e98002f80c00057eaa10050c908007a7f5700076c1f005e0b93n;
-  t1[3][11] = 0x0025c0f9002d1e2d003e61e500376bda003e91d600030b3b0008fadb00096e0fn;
-  t1[3][12] = 0x0059e2e0001cb0ab00412c380022adee003b18d2001f88db003d2c8b005ca7a8n;
-  t1[3][13] = 0x003b16fd00260f7c0002b5b6007b89a80072cd20006bf3ae00605b9600418a12n;
-  t1[3][14] = 0x001c5c910030b42d00282c5b001c7a5d0044c5e70009dc30000cf6c800591e61n;
-  t1[3][15] = 0x00291fb70074f32c006f2cc0007b1d2a00195bb900536c6f001a82180025c9c1n;
-  t1[3][16] = 0x003c97830063c1eb001c3e37007c41f100461e7c00086f20003a8d24004a09e4n;
-  t1[3][17] = 0x007fac6b005d230a0074d18b006c4f09001d706c006cec730049be76003d2e4cn;
-  t1[3][18] = 0x0016a80a005a3a950027efec000aeaad0072bde0001b56a4006d3af3004df4e3n;
-  t1[3][19] = 0x006afca7001e88c2007c24e80043d61a00178b550040f5c5004ddd0f0026a0d6n;
-  t1[3][20] = 0x000acd03001d84eb00219b8a001c9a430014f7d60013dd5c004085fc0029ca7dn;
-  t1[3][21] = 0x0059aaf000295eb7000d1f35003cc62d005b32df000a22ca00361ec80071ef5an;
-  t1[3][22] = 0x004091b9005bc58c0078c37b006c68c90057e64a007f3a01007c79a10047f2edn;
-  t1[3][23] = 0x00449d45001acf3b005d3d62007c39c0006c3ebd0004c6da001a3c660021c75dn;
-  t1[3][24] = 0x0077f2120077b7df000916eb000b03eb006d7d47004e5c1a0059a1b3003820a5n;
-  t1[3][25] = 0x003c8e8c0025cf0e0006cb2a0065c2ec0003e44f00648d2a004078cb007f5193n;
-  t1[3][26] = 0x006b9a3a006f4bab0050a6ac002fb60f003e19f30062e76d002b65a6000e6f09n;
+  t1[3][0] = 0x001da6e8003a24bd0035e6600052ebca004ebcb30000dc2f001f518f004bad17n;
+  t1[3][1] = 0x0071e163002816c5001b874b000258d700302a41004bc862002f9048002e9932n;
+  t1[3][2] = 0x00306aad006db59c006c42590009d4c900651bc70057b7d2005bf1cd0024a9b8n;
+  t1[3][3] = 0x00184dca005d7cf1001fdd13002ddf81003ba95f0026279a00195d6b000a5445n;
+  t1[3][4] = 0x0066abfe006fce63003599820073475800641956007638530038d675003347dfn;
+  t1[3][5] = 0x005a84f00013caf3003e3cdb006d5482007f70f1001ecf5e006918080036c045n;
+  t1[3][6] = 0x0063743600298a9e00333462000e8e7e001d905a00332a61004303290037c07an;
+  t1[3][7] = 0x002105c1005d2285003ace8f005e719d005c0022007be9ea001a60d8006d8d73n;
+  t1[3][8] = 0x003af9150037d7e4002510b30051bbd00076cd14001b692e004542a60016fdd8n;
+  t1[3][9] = 0x0018d66f001650d6002cb32d0044a660006fa8420063005f005694e7001e4a43n;
+  t1[3][10] = 0x007a8932005901b70003775e0040c4760070ed7f006a783400532e0f001837d6n;
+  t1[3][11] = 0x009375400449dfb0044aa1a0035caf6005562a000016b660027a93900114d8bn;
+  t1[3][12] = 0x003cc9ae00570fa30024aa93007ee6420057bae700582219002e0885002ac31en;
+  t1[3][13] = 0x001ced6e0069033300659c2a0015d319007f2f950002c046006ecccb00210a79n;
+  t1[3][14] = 0x0058871d0024e22f00531b8c00067fa3003531fb00146dc80062350b007aadefn;
+  t1[3][15] = 0x0024f87c007c2a850060f1ff00493596002b7566002772dd000fc340007e6da4n;
+  t1[3][16] = 0x0048ed2a007bea6400772f580043aa5f0005e853003c63ed0045b7ad002ddeb3n;
+  t1[3][17] = 0x005922d4003ce7fc002f72ec0041ad8d000d00770010bae600510e6c006c3c21n;
+  t1[3][18] = 0x0049798800476cbb00580ff2006ba3520034faeb0068e1730031d6040049ef6bn;
+  t1[3][19] = 0x005f893a003124c00006409c0058eb63003f8f1800394f70007e6e0c00113bden;
+  t1[3][20] = 0x006601d40071a06b005aa3c40002b0a6005b63120034d61900608f93001fbbafn;
+  t1[3][21] = 0x0030acbb007db1420048085500331d1c0070484a0033538c00268bd40064ddf8n;
+  t1[3][22] = 0x0077049d0010f11e006c4711005f6755007ce25e00798b5d002fee55002f8699n;
+  t1[3][23] = 0x007f7863006256200031421f00363ab8006a8d0b006f812f0030699a006051fen;
+  t1[3][24] = 0x0052e3a5007a4bde000ef5bf000090e5006d7f9a003b9e2d0016082c00147dadn;
+  t1[3][25] = 0x00613aba000be3c000163937004904c80045256600331ced0049993c0000e597n;
+  t1[3][26] = 0x0039c4e60000c60b005d2ecf007d71d00001cd35004f5e31006bdeb4005f8b11n;
   t1[3][27] = 0x006b09090031532e0066f451001a10580017ca72001624f000383bce002c74b1n;
   t1[3][28] = 0x0076367c0045fc3c0076ed4900731bba0069ae07007f70070034ab21006e2647n;
   t1[3][29] = 0x00399380043ac6f0048e72300598157001bc9a7004b3e7b002cf5d5003b5e3cn;
@@ -1080,7 +1080,7 @@ describe('ETHDILITHIUM Precompile Contract Tests', () => {
 
       // Contract call must succeed and return a defined result
       expect(result.success).toBe(true);
-      expect(result.result).toBeDefined();
+      expect(result.result).toBe(true);
       console.log(`✅ Contract returned: ${result.result}`);
     }, 120000);
   });
@@ -1106,8 +1106,41 @@ describe('ETHDILITHIUM Precompile Contract Tests', () => {
       // Call must succeed
       expect(result.success).toBe(true);
       // When A_hat is properly filled, this should return true
-      // Currently returns false because A_hat placeholders are 0x0n
+      expect(result.result).toBe(true);
       console.log(`✅ Verification result: ${result.result}`);
+    }, 120000);
+
+    it('should reject an invalid signature (modified c_tilde)', async () => {
+      const a_hat = createAHat();
+      const t1 = createT1();
+
+      // Modify c_tilde to create an invalid signature
+      const invalidCtilde = (SIGNATURE_DATA.c_tilde.slice(0, -2) + '00') as Hex;
+
+      const result = await callEthdilithiumVerify(
+        a_hat,
+        TR,
+        t1,
+        MESSAGE,
+        invalidCtilde,
+        SIGNATURE_DATA.z,
+        SIGNATURE_DATA.h,
+        '' // empty context
+      );
+
+      console.log(`📊 Invalid signature result:`, result);
+
+      if (result.success) {
+        // If the call succeeded, the result should be false (invalid signature)
+        expect(result.result).toBe(false);
+        console.log(`✅ Invalid signature correctly rejected`);
+      } else {
+        // An error/revert during execution is also acceptable for invalid input
+        console.log(
+          `✅ Invalid signature caused expected error: ${result.error}`
+        );
+        expect(result.error).toBeDefined();
+      }
     }, 120000);
   });
 
@@ -1140,6 +1173,7 @@ describe('ETHDILITHIUM Precompile Contract Tests', () => {
       expect(result.success).toBe(true);
       expect(result.txHash).toBeDefined();
       expect(result.gasUsed).toBeDefined();
+      expect(result.result).toBe(true);
       console.log(`⛽ Gas Used: ${result.gasUsed}`);
       console.log(`✅ Transaction completed successfully`);
     }, 180000);
