@@ -4,7 +4,12 @@ import { createPublicClient, http } from 'viem'
  * RPC configuration for NTT precompile testing
  * Uses the remote node that has NTT precompiles deployed
  */
-export const RPC_URL = process.env.RPC_URL || 'http://34.29.49.47:8545'
+export const RPC_URL = process.env.RPC_URL || 'http://34.173.116.94:8545'
+
+/**
+ * Chain ID for the NTT precompile test network
+ */
+export const CHAIN_ID = 788484
 
 /**
  * Create a public client for interacting with the precompile-enabled node
@@ -18,11 +23,21 @@ export const publicClient = createPublicClient({
 })
 
 /**
- * Precompile addresses as defined in EIP-7885
+ * Precompile addresses as defined in EIP-7885 (Pure NTT only)
  */
 export const PRECOMPILE_ADDRESSES = {
   PURE_NTT: '0x0000000000000000000000000000000000000012' as const,
-  PRECOMPUTED_NTT: '0x0000000000000000000000000000000000000013' as const,
+} as const
+
+/**
+ * Deployed post-quantum signature verification contract addresses
+ * on the NTT precompile test network (Chain ID: 788484)
+ */
+export const DEPLOYED_CONTRACTS = {
+  /** ETHFALCON signature verification contract */
+  ETHFALCON: '0x7dD023ff0a7bf618253aE4937b8f6a98EC779307' as const,
+  /** ETHDILITHIUM signature verification contract */
+  ETHDILITHIUM: '0xA9186e255110326A733df4813f5F533426F6d8F3' as const,
 } as const
 
 /**
