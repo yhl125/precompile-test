@@ -9,6 +9,11 @@ dist/
 build/
 *.tsbuildinfo
 
+# Hardhat
+artifacts/
+cache/
+typechain-types/
+
 # Test outputs
 coverage/
 .vitest/

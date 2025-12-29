@@ -13,14 +13,12 @@ import {
   WALLET_CONFIG,
   nttTestChain,
 } from '../config/wallet-config.js';
+import { deployForEthfalconTests } from './deploy-helper.js';
 
 /**
- * Deployed contract addresses on the NTT precompile test network (Chain ID: 788484)
+ * Contract address - set dynamically after deployment in beforeAll
  */
-export const DEPLOYED_CONTRACTS = {
-  ETHFALCON: '0x7dD023ff0a7bf618253aE4937b8f6a98EC779307' as const,
-  ETHDILITHIUM: '0x8e76bb430ccf6049633f37f6825596c991f8951a' as const,
-} as const;
+let ETHFALCON_ADDRESS: Hex = '0x0' as Hex;
 
 /**
  * ETHFALCON ABI for the verify function
@@ -173,7 +171,7 @@ async function callEthfalconVerify(
     );
 
     const result = await txPublicClient.call({
-      to: DEPLOYED_CONTRACTS.ETHFALCON,
+      to: ETHFALCON_ADDRESS,
       data,
     });
 
@@ -238,7 +236,7 @@ async function sendEthfalconVerifyTransaction(
     const txHash = await walletClient.sendTransaction({
       account: privateKeyAccount,
       chain: nttTestChain,
-      to: DEPLOYED_CONTRACTS.ETHFALCON,
+      to: ETHFALCON_ADDRESS,
       data,
       value: 0n,
     });
@@ -284,23 +282,28 @@ async function sendEthfalconVerifyTransaction(
 }
 
 describe('ETHFALCON Precompile Contract Tests', () => {
-  beforeAll(() => {
+  beforeAll(async () => {
     console.log(`🔑 Wallet Address: ${WALLET_CONFIG.address}`);
     console.log(`🌐 RPC URL: ${WALLET_CONFIG.rpcUrl}`);
-    console.log(`📍 ETHFALCON Contract: ${DEPLOYED_CONTRACTS.ETHFALCON}`);
-
-    // Compute and display function selector
-    const selector = keccak256(
-      toHex('verify(bytes,bytes,uint256[],uint256[])')
-    ).slice(0, 10);
-    console.log(`🔧 Expected function selector: ${selector}`);
 
     if (!WALLET_CONFIG.hasPrivateKey) {
       throw new Error(
         'Private key not configured. Please set PRIVATE_KEY in .env file'
       );
     }
-  });
+
+    // Deploy contracts needed for ETHFALCON tests
+    const contracts = await deployForEthfalconTests();
+    ETHFALCON_ADDRESS = contracts.ethfalcon;
+
+    console.log(`📍 ETHFALCON Contract: ${ETHFALCON_ADDRESS}`);
+
+    // Compute and display function selector
+    const selector = keccak256(
+      toHex('verify(bytes,bytes,uint256[],uint256[])')
+    ).slice(0, 10);
+    console.log(`🔧 Expected function selector: ${selector}`);
+  }, 300000);
 
   describe('Contract Connectivity', () => {
     it('should be able to call the ETHFALCON contract with full test data', async () => {
